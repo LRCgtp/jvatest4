@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.exam.dao.FilmDao" >
+  <resultMap id="BaseResultMap" type="com.hand.exam.entity.Film" >
+    <constructor >
+      <idArg column="film_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="release_year" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="language_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="original_language_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="rental_duration" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="rental_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="length" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="replacement_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="rating" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="special_features" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="last_update" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    film_id, title, release_year, language_id, original_language_id, rental_duration, 
+    rental_rate, length, replacement_cost, rating, special_features, last_update
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+
+  <insert id="insertFilm" parameterType="com.hand.exam.entity.Film" >
+    insert into film (film_id, title, release_year, 
+      language_id, original_language_id, rental_duration, 
+      rental_rate, length, replacement_cost, 
+      rating, special_features, last_update, 
+      description)
+    values (#{filmId,jdbcType=SMALLINT}, #{title,jdbcType=VARCHAR}, #{releaseYear,jdbcType=DATE}, 
+      #{languageId,jdbcType=TINYINT}, #{originalLanguageId,jdbcType=TINYINT}, #{rentalDuration,jdbcType=TINYINT}, 
+      #{rentalRate,jdbcType=DECIMAL}, #{length,jdbcType=SMALLINT}, #{replacementCost,jdbcType=DECIMAL}, 
+      #{rating,jdbcType=CHAR}, #{specialFeatures,jdbcType=CHAR}, #{lastUpdate,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="getFilms" resultType="com.hand.exam.entity.Film">
+    select * from film
+  </select>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(1) from film
+  </select>
+  <!-- <insert id="insertSelective" parameterType="com.exam.exam1.entity.Film" >
+     insert into film
+     <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="filmId != null" >
+         film_id,
+       </if>
+       <if test="title != null" >
+         title,
+       </if>
+       <if test="releaseYear != null" >
+         release_year,
+       </if>
+       <if test="languageId != null" >
+         language_id,
+       </if>
+       <if test="originalLanguageId != null" >
+         original_language_id,
+       </if>
+       <if test="rentalDuration != null" >
+         rental_duration,
+       </if>
+       <if test="rentalRate != null" >
+         rental_rate,
+       </if>
+       <if test="length != null" >
+         length,
+       </if>
+       <if test="replacementCost != null" >
+         replacement_cost,
+       </if>
+       <if test="rating != null" >
+         rating,
+       </if>
+       <if test="specialFeatures != null" >
+         special_features,
+       </if>
+       <if test="lastUpdate != null" >
+         last_update,
+       </if>
+       <if test="description != null" >
+         description,
+       </if>
+     </trim>
+     <trim prefix="values (" suffix=")" suffixOverrides="," >
+       <if test="filmId != null" >
+         #{filmId,jdbcType=SMALLINT},
+       </if>
+       <if test="title != null" >
+         #{title,jdbcType=VARCHAR},
+       </if>
+       <if test="releaseYear != null" >
+         #{releaseYear,jdbcType=DATE},
+       </if>
+       <if test="languageId != null" >
+         #{languageId,jdbcType=TINYINT},
+       </if>
+       <if test="originalLanguageId != null" >
+         #{originalLanguageId,jdbcType=TINYINT},
+       </if>
+       <if test="rentalDuration != null" >
+         #{rentalDuration,jdbcType=TINYINT},
+       </if>
+       <if test="rentalRate != null" >
+         #{rentalRate,jdbcType=DECIMAL},
+       </if>
+       <if test="length != null" >
+         #{length,jdbcType=SMALLINT},
+       </if>
+       <if test="replacementCost != null" >
+         #{replacementCost,jdbcType=DECIMAL},
+       </if>
+       <if test="rating != null" >
+         #{rating,jdbcType=CHAR},
+       </if>
+       <if test="specialFeatures != null" >
+         #{specialFeatures,jdbcType=CHAR},
+       </if>
+       <if test="lastUpdate != null" >
+         #{lastUpdate,jdbcType=TIMESTAMP},
+       </if>
+       <if test="description != null" >
+         #{description,jdbcType=LONGVARCHAR},
+       </if>
+     </trim>
+   </insert>-->
+
+</mapper>

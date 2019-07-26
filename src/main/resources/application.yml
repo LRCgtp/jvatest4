@@ -1,0 +1,21 @@
+server:
+  port: 18080
+spring:
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql/sakila?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+  mvc:
+    view:
+      prefix: classpath:/templates/html/
+      suffix: .html
+mybatis:
+  mapper-locations: classpath:com/hand/exam/mapper/*.xml
+  type-aliases-package: com.hand.exam.entity
+
+
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.exam.dao.LoginDao" >
+  <resultMap id="BaseResultMap" type="com.hand.exam.entity.Customer" >
+    <constructor >
+      <idArg column="customer_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="store_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="first_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="last_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="address_id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="active" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="create_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="last_update" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_id, store_id, first_name, last_name, email, address_id, active, create_date, 
+    last_update
+  </sql>
+  <insert id="insertCustomer" useGeneratedKeys="true" keyProperty="id">
+     insert into customer (customer_id, store_id, first_name,
+      last_name, email, address_id,
+      active, create_date, last_update
+      )
+    values (#{customerId,jdbcType=SMALLINT}, #{storeId,jdbcType=TINYINT}, #{firstName,jdbcType=VARCHAR},
+      #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{addressId,jdbcType=SMALLINT},
+      #{active,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateCustomer">
+    update customer
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=TINYINT},
+      </if>
+      <if test="firstName != null" >
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null" >
+        last_name = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=SMALLINT},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null" >
+        last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=SMALLINT}
+  </update>
+  <select id="getCustomerByName" resultType="com.hand.exam.entity.Customer">
+    select last_name from customer where first_name=#{name}
+  </select>
+
+</mapper>
