@@ -18,17 +18,16 @@
     customer_id, store_id, first_name, last_name, email, address_id, active, create_date, 
     last_update
   </sql>
-  <insert id="insertCustomer" useGeneratedKeys="true" keyProperty="id">
-     insert into customer (customer_id, store_id, first_name,
-      last_name, email, address_id,
-      active, create_date, last_update
+  <insert id="insertCustomer" useGeneratedKeys="true" keyProperty="customerId">
+       insert into customer (customer_id, store_id, first_name,
+      last_name, email, address_id
       )
-    values (#{customerId,jdbcType=SMALLINT}, #{storeId,jdbcType=TINYINT}, #{firstName,jdbcType=VARCHAR},
-      #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{addressId,jdbcType=SMALLINT},
-      #{active,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+    values (null , #{storeId}, #{firstName,jdbcType=VARCHAR},
+      #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 1
       )
   </insert>
-  <update id="updateCustomer">
+
+  <update id="updateCustomer" useGeneratedKeys="true" keyProperty="customer_id">
     update customer
     <set >
       <if test="storeId != null" >
@@ -58,7 +57,11 @@
     </set>
     where customer_id = #{customerId,jdbcType=SMALLINT}
   </update>
-  <select id="getCustomerByName" resultType="com.hand.exam.entity.Customer">
+  <delete id="deleteCustomer">
+    delete from customer
+    where customer_id = #{customerId,jdbcType=SMALLINT}
+  </delete>
+  <select id="getCustomerByName" resultType="String">
     select last_name from customer where first_name=#{name}
   </select>
 

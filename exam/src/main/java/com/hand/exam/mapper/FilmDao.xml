@@ -27,16 +27,8 @@
   </sql>
 
   <insert id="insertFilm" parameterType="com.hand.exam.entity.Film" >
-    insert into film (film_id, title, release_year, 
-      language_id, original_language_id, rental_duration, 
-      rental_rate, length, replacement_cost, 
-      rating, special_features, last_update, 
-      description)
-    values (#{filmId,jdbcType=SMALLINT}, #{title,jdbcType=VARCHAR}, #{releaseYear,jdbcType=DATE}, 
-      #{languageId,jdbcType=TINYINT}, #{originalLanguageId,jdbcType=TINYINT}, #{rentalDuration,jdbcType=TINYINT}, 
-      #{rentalRate,jdbcType=DECIMAL}, #{length,jdbcType=SMALLINT}, #{replacementCost,jdbcType=DECIMAL}, 
-      #{rating,jdbcType=CHAR}, #{specialFeatures,jdbcType=CHAR}, #{lastUpdate,jdbcType=TIMESTAMP}, 
-      #{description,jdbcType=LONGVARCHAR})
+    insert into film (film_id,title,language_id)
+    values (null ,"ss",1)
   </insert>
   <select id="getFilms" resultType="com.hand.exam.entity.Film">
     select * from film

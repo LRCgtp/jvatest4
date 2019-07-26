@@ -1,11 +1,9 @@
 package com.hand.exam.service.imp;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hand.exam.dao.FilmDao;
-import com.hand.exam.entity.Customer;
 import com.hand.exam.entity.Film;
-import com.hand.exam.entity.Page;
+import com.hand.exam.entity.PageInfo;
 import com.hand.exam.service.IFilmService;
 import com.hand.exam.utiils.Log;
 import com.hand.exam.utiils.ResultBean;
@@ -39,13 +37,13 @@ public class FilmService implements IFilmService {
     }
 
     @Override
-    public Page filmList(String pageNo,String pageSieze) {
+    public PageInfo filmList(String pageNo, String pageSieze) {
         Log.logger.info("插入分页参数",pageNo,pageSieze);
         PageHelper.startPage(Integer.parseInt(pageNo),Integer.parseInt(pageSieze));
         List<Film> films = filmDao.getFilms();
         Log.logger.info(films.toString());
         Integer count=filmDao.getCount();
-        Page<Film> pageInfo=new Page<>();
+        PageInfo<Film> pageInfo=new PageInfo<>();
         pageInfo.setCount(count);
         Integer pageCount;
         Integer paesize=Integer.parseInt(pageSieze);

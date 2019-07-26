@@ -9,5 +9,7 @@ public interface ILoginService {
     ResultBean<Customer> saveCoustomer(Customer customer);
 
 
-    ResultBean<Customer> updateCustomer(Integer id);
+    ResultBean<Customer> updateCustomer(Short id);
+
+    ResultBean<Customer> delteCustomer(Short id);
 }

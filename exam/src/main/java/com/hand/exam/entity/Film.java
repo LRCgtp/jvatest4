@@ -25,13 +25,16 @@ public class Film implements Serializable {
 
     private String rating;
 
+    private Byte language_id;
+
     private String specialFeatures;
 
     private Date lastUpdate;
 
     private String description;
 
-    public Film(Short filmId, String title, Date releaseYear, Byte languageId, Byte originalLanguageId, Byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost, String rating, String specialFeatures, Date lastUpdate, String description) {
+
+    public Film(Short filmId, String title, Date releaseYear, Byte languageId, Byte originalLanguageId, Byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost, String rating, Byte language_id, String specialFeatures, Date lastUpdate, String description) {
         this.filmId = filmId;
         this.title = title;
         this.releaseYear = releaseYear;
@@ -42,6 +45,7 @@ public class Film implements Serializable {
         this.length = length;
         this.replacementCost = replacementCost;
         this.rating = rating;
+        this.language_id = language_id;
         this.specialFeatures = specialFeatures;
         this.lastUpdate = lastUpdate;
         this.description = description;
@@ -49,6 +53,14 @@ public class Film implements Serializable {
 
     public Film() {
         super();
+    }
+
+    public Byte getLanguage_id() {
+        return language_id;
+    }
+
+    public void setLanguage_id(Byte language_id) {
+        this.language_id = language_id;
     }
 
     public Short getFilmId() {
@@ -155,4 +167,23 @@ public class Film implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    @Override
+    public String toString() {
+        return "Film{" +
+                "filmId=" + filmId +
+                ", title='" + title + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", languageId=" + languageId +
+                ", originalLanguageId=" + originalLanguageId +
+                ", rentalDuration=" + rentalDuration +
+                ", rentalRate=" + rentalRate +
+                ", length=" + length +
+                ", replacementCost=" + replacementCost +
+                ", rating='" + rating + '\'' +
+                ", language_id=" + language_id +
+                ", specialFeatures='" + specialFeatures + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

@@ -1,10 +1,14 @@
 package com.hand.exam.web;
 
+import com.hand.exam.entity.Address;
 import com.hand.exam.entity.Customer;
+import com.hand.exam.service.IAdressService;
 import com.hand.exam.service.ILoginService;
 import com.hand.exam.utiils.Log;
 import com.hand.exam.utiils.ResultBean;
 import com.hand.exam.utiils.UserToken;
+import com.hand.exam.vo.Change;
+import com.hand.exam.vo.VoAdress;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.UUID;
 
 @RestController
@@ -21,6 +26,9 @@ public class LoginController {
 
     @Autowired
     private ILoginService iLoginService;
+
+    @Autowired
+    private IAdressService iAdressService;
 
     @PostMapping("select")
     public ResultBean<Customer> select(@Param("name") String name, @Param("password") String password,
@@ -47,9 +55,42 @@ public class LoginController {
     }
 
     @PutMapping("insert")
-    public ResultBean<Customer> insert(@RequestBody Customer customer){
+    public ResultBean insert(@RequestBody Customer customer){
         Log.logger.info("LoginController开始插入参数"+customer);
-        ResultBean<Customer> customerResultBean = iLoginService.saveCoustomer(customer);
+        customer.setStoreId((byte)1);
+        ResultBean<Customer> customerResultBean= customerResultBean=iLoginService.saveCoustomer(customer);
+        Short id=null;
+        Change change=new Change();
+        if (customerResultBean.getT() !=null){
+            Log.logger.info("主键回填"+customer);
+           change.setCustom_id(customerResultBean.getT().getCustomerId());
+           return customerResultBean;
+        }
         return customerResultBean;
     }
+
+    @PostMapping("update")
+    public ResultBean<Customer> update(){
+        Change change=new Change();
+        short id=0;
+        if (change !=null){
+             id=change.getCustom_id();
+        }
+        Log.logger.info("LoginController开始跟新参数"+id+change);
+        ResultBean<Customer> customerResultBean = iLoginService.updateCustomer(id);
+        return customerResultBean;
+    }
+
+    @DeleteMapping("delete")
+    public ResultBean<Customer> delete(){
+        Change change=new Change();
+        short id=0;
+        if (change !=null){
+            id=change.getCustom_id();
+        }
+        Log.logger.info("LoginController开始删除"+id,change);
+        ResultBean<Customer> customerResultBean = iLoginService.delteCustomer(id);
+        return customerResultBean;
+    }
+
 }

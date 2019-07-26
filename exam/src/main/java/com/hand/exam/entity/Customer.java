@@ -2,6 +2,7 @@ package com.hand.exam.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Customer implements Serializable {
     private Short customerId;
@@ -22,7 +23,12 @@ public class Customer implements Serializable {
 
     private Date lastUpdate;
 
-    public Customer(Short customerId, Byte storeId, String firstName, String lastName, String email, Short addressId, Boolean active, Date createDate, Date lastUpdate) {
+private List<Address> addressList;
+
+private String address;
+
+
+    public Customer(Short customerId, Byte storeId, String firstName, String lastName, String email, Short addressId, Boolean active, Date createDate, Date lastUpdate, List<Address> addressList, String address) {
         this.customerId = customerId;
         this.storeId = storeId;
         this.firstName = firstName;
@@ -32,10 +38,11 @@ public class Customer implements Serializable {
         this.active = active;
         this.createDate = createDate;
         this.lastUpdate = lastUpdate;
+        this.addressList = addressList;
+        this.address = address;
     }
 
     public Customer() {
-        super();
     }
 
     public Short getCustomerId() {
@@ -59,7 +66,7 @@ public class Customer implements Serializable {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName == null ? null : firstName.trim();
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -67,7 +74,7 @@ public class Customer implements Serializable {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName == null ? null : lastName.trim();
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -75,7 +82,7 @@ public class Customer implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public Short getAddressId() {
@@ -110,6 +117,22 @@ public class Customer implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -122,6 +145,8 @@ public class Customer implements Serializable {
                 ", active=" + active +
                 ", createDate=" + createDate +
                 ", lastUpdate=" + lastUpdate +
+                ", addressList=" + addressList +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

@@ -6,7 +6,7 @@ services:
       context: /docker/java/
       dockerfile: DockerFile
     ports:
-    - "8050:8050"
+    - "8050:18080"
     depends_on:
     - mysql
   mysql:
@@ -14,7 +14,7 @@ services:
       context: /docker/mysql/
       dockerfile: DockerFile
     ports:
-    - "3307:3306"
+    - "3306:3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
