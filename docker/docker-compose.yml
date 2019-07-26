@@ -1,0 +1,20 @@
+version: "3"
+services:
+  booapp:
+    container_name: boot_age
+    build:
+      context: ./java/
+      dockerfile: DockerFile
+    ports:
+    - "8050:18080"
+    depends_on:
+    - mysql
+  mysql:
+    build:
+      context: ./mysql/
+      dockerfile: DockerFile
+    ports:
+    - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root

@@ -30,6 +30,8 @@ public class LoginController {
     @Autowired
     private IAdressService iAdressService;
 
+    Change change=new Change();
+
     @PostMapping("select")
     public ResultBean<Customer> select(@Param("name") String name, @Param("password") String password,
                                        HttpServletRequest request, HttpServletResponse response){
@@ -60,10 +62,10 @@ public class LoginController {
         customer.setStoreId((byte)1);
         ResultBean<Customer> customerResultBean= customerResultBean=iLoginService.saveCoustomer(customer);
         Short id=null;
-        Change change=new Change();
         if (customerResultBean.getT() !=null){
             Log.logger.info("主键回填"+customer);
            change.setCustom_id(customerResultBean.getT().getCustomerId());
+           Log.logger.info("chang为"+change.toString());
            return customerResultBean;
         }
         return customerResultBean;
@@ -71,7 +73,6 @@ public class LoginController {
 
     @PostMapping("update")
     public ResultBean<Customer> update(){
-        Change change=new Change();
         short id=0;
         if (change !=null){
              id=change.getCustom_id();
@@ -83,7 +84,6 @@ public class LoginController {
 
     @DeleteMapping("delete")
     public ResultBean<Customer> delete(){
-        Change change=new Change();
         short id=0;
         if (change !=null){
             id=change.getCustom_id();

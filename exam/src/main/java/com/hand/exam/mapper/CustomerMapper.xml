@@ -20,42 +20,17 @@
   </sql>
   <insert id="insertCustomer" useGeneratedKeys="true" keyProperty="customerId">
        insert into customer (customer_id, store_id, first_name,
-      last_name, email, address_id
+      last_name, email, address_id,create_date
       )
     values (null , #{storeId}, #{firstName,jdbcType=VARCHAR},
-      #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 1
+      #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 1,NOW()
       )
   </insert>
 
   <update id="updateCustomer" useGeneratedKeys="true" keyProperty="customer_id">
-    update customer
-    <set >
-      <if test="storeId != null" >
-        store_id = #{storeId,jdbcType=TINYINT},
-      </if>
-      <if test="firstName != null" >
-        first_name = #{firstName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastName != null" >
-        last_name = #{lastName,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="addressId != null" >
-        address_id = #{addressId,jdbcType=SMALLINT},
-      </if>
-      <if test="active != null" >
-        active = #{active,jdbcType=BIT},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastUpdate != null" >
-        last_update = #{lastUpdate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where customer_id = #{customerId,jdbcType=SMALLINT}
+  update customer
+  set email = "3115679714@qq.com"
+  where customer_id = #{customerId,jdbcType=SMALLINT}
   </update>
   <delete id="deleteCustomer">
     delete from customer

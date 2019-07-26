@@ -54,10 +54,11 @@ public class LoginService implements ILoginService {
         Customer customer=new Customer();
       Log.logger.info("LoginService开始跟新操作");
         int i = loginDao.updateCustomer(id);
+        Log.logger.info("返回值"+id);
         if (i==0){
-            return new ResultBean<Customer>(1,"更新成功",customer);
+            return new ResultBean<>(0,"更新出错",null);
         }
-        return new ResultBean<>(0,"更新出错",null);
+        return new ResultBean<Customer>(1,"更新成功",customer);
     }
 
     @Override
